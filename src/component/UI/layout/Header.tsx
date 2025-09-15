@@ -7,10 +7,14 @@ import {
   Link,
   Button,
 } from "@heroui/react";
-import Logo from "../../../public/logo_tatar_kitchen.png";
+import Logo from '../../../../public/logo_tatar_kitchen.png';
 import Image from "next/image";
 import { site } from "@/config/site.config";
 import { usePathname } from "next/navigation";
+import { layoutConfig } from "@/config/layout.config";
+import RegistrationModal from "../modals/registration.modal";
+import { useState } from "react";
+import LoginModal from "../modals/login.modal";
 export const AcmeLogo = () => {
   return (
     <Image
@@ -25,6 +29,9 @@ export const AcmeLogo = () => {
 };
 
 export default function Header() {
+  const [isRegistrationOpen, setIsRegistrationOpen] = useState(false);
+  const [isLoginOpen, setIsLoginOpen] = useState(false);
+
   const path = usePathname();
   const headerMenu = () => {
     return site.paths.map((item) => {
@@ -41,12 +48,13 @@ export default function Header() {
       );
     });
   };
+
   return (
-    <Navbar>
+    <Navbar style={{ height: `${layoutConfig.headerHeight}` }}>
       <NavbarBrand>
         <Link href="/">
-        <AcmeLogo />
-        <p className="font-bold text-inherit text-white">{site.title}</p>
+          <AcmeLogo />
+          <p className="font-bold text-inherit text-white">{site.title}</p>
         </Link>
       </NavbarBrand>
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
@@ -54,14 +62,33 @@ export default function Header() {
       </NavbarContent>
       <NavbarContent justify="end">
         <NavbarItem className="hidden lg:flex">
-          <Link href="#">Войти</Link>
+          <Button
+            as={Link}
+            color="primary"
+            href="#"
+            variant="flat"
+            onPress={() => setIsLoginOpen(true)}
+          >
+            Зарегистрироваться
+          </Button>
         </NavbarItem>
         <NavbarItem>
-          <Button as={Link} color="primary" href="#" variant="flat">
+          <Button
+            as={Link}
+            color="primary"
+            href="#"
+            variant="flat"
+            onPress={() => setIsRegistrationOpen(true)}
+          >
             Зарегистрироваться
           </Button>
         </NavbarItem>
       </NavbarContent>
+      <RegistrationModal
+        onClose={() => setIsRegistrationOpen(false)}
+        isOpen={isRegistrationOpen}
+      />
+      <LoginModal onClose={() => setIsLoginOpen(false)} isOpen={isLoginOpen} />
     </Navbar>
   );
 }

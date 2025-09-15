@@ -1,5 +1,5 @@
 {
-  "name": "project",
+  "name": "Tatarian kitchen",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,6 +9,8 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@heroui/form": "^2.1.26",
+    "@heroui/modal": "^2.2.23",
     "@heroui/navbar": "^2.2.24",
     "@heroui/react": "^2.8.4",
     "@heroui/system": "^2.4.22",
