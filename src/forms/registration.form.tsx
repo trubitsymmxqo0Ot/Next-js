@@ -3,6 +3,7 @@ import { Form } from "@heroui/form";
 import { Input } from "@heroui/react";
 import React, { FC, useState } from "react";
 import { Button } from "@heroui/react";
+import { registerUser } from "@/actions/register";
 interface registrationFormProps {
   onClose: () => void;
 }
@@ -22,8 +23,8 @@ const RegistrationForm: FC<registrationFormProps> = (props) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form submitted ", formData);
-
+    const result = await registerUser(formData);
+    console.log(result);
     onClose();
   };
   return (

@@ -69,7 +69,7 @@ export default function Header() {
             variant="flat"
             onPress={() => setIsLoginOpen(true)}
           >
-            Зарегистрироваться
+            Войти
           </Button>
         </NavbarItem>
         <NavbarItem>
